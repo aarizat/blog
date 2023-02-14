@@ -7,9 +7,6 @@ copyright: Copyright &copy; 2023 Andres Ariza-Triana
 theme:
   name: material
   locale: en
-  custom_dir: overrides
-  favicon: images/favicon.ico
-  logo: images/favicon.ico
   features:
     - navigation.sections
     - content.code.annotate
@@ -44,21 +41,6 @@ plugins:
       categories:
         - categories
         - tags
-
-markdown_extensions:
-  - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-  - admonition
-  - pymdownx.details
-  - pymdownx.tabbed:
-      alternate_style: true
 
 nav:
   - Blog:
