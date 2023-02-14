@@ -28,7 +28,6 @@ theme:
         name: Switch to system preference
 
 plugins:
-  - meta
   - search
   - tags
   - blog:
