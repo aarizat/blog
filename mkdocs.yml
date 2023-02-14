@@ -14,7 +14,7 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: slate
-      primary: deep orange
+      primary: blue grey
       toggle:
         icon: material/lightbulb
         name: Switch to dark mode
@@ -22,18 +22,41 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: default
-      primary: deep orange
+      primary: blue grey
       toggle:
         icon: material/lightbulb-outline
         name: Switch to system preference
 
+nav:
+  - About: about.md
+  - Home: index.md
+
 plugins:
   - search
-  - tags
+  - roamlinks
+  - blogging:
+      meta_time_format: "%Y-%m-%d %H:%M:%S"
+      time_format: '%Y-%m-%d %H:%M:%S'
+      dirs:
+        - posts
 
-nav:
-  - Blog:
-      - index.md
+# Extensions
+markdown_extensions:
+  - def_list
+  - footnotes
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.magiclink
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji
+  - admonition
+  - toc:
+      permalink: true
 
 extra:
   social:
