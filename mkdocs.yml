@@ -30,8 +30,6 @@ theme:
 plugins:
   - search
   - tags
-  - blog:
-      blog_dir: .
   - rss:
       match_path: blog/posts/.*
       comments_path: "#__comments"
