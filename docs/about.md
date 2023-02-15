@@ -1,3 +1,3 @@
 # About
 
-Python Developer.
+:snake: Python & Rust Developer :snake:

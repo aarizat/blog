@@ -30,6 +30,8 @@ theme:
 nav:
   - About: about.md
   - Home: index.md
+  - Posts:
+    - posts/dratf_post.md
 
 plugins:
   - search
