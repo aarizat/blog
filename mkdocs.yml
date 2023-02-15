@@ -8,8 +8,9 @@ theme:
   name: material
   locale: en
   features:
-    - navigation.sections
-    - content.code.annotate
+  - search.suggest
+  - search.highlight
+  - content.tabs.link
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -26,8 +27,6 @@ theme:
       toggle:
         icon: material/lightbulb-outline
         name: Switch to system preference
-repo_name: aarizat/aarizat
-repo_url: https://github.com/aarizat/aarizat
 
 nav:
   - About: about.md
