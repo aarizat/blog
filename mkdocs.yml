@@ -26,10 +26,12 @@ theme:
       toggle:
         icon: material/lightbulb-outline
         name: Switch to system preference
+repo_name: aarizat/aarizat
+repo_url: https://github.com/aarizat/aarizat
 
 nav:
   - About: about.md
-  - Home: index.md
+  # - Home: index.md
   - Posts:
     - posts/dratf_post.md
 
