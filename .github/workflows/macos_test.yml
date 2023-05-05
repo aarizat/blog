@@ -1,0 +1,31 @@
+name: My Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      manual_trigger:
+        description: 'Trigger the workflow manually'
+        required: true
+
+jobs:
+  build:
+    runs-on: macos-12.4
+
+    steps:
+    - name: Display system information
+      run: |
+        uname -a
+        sw_vers
+    - name: Check Python version
+      run: python --version
+    - name: Setup Pyenv
+      run: |
+        curl https://pyenv.run | bash
+        export PATH="$HOME/.pyenv/bin:$PATH"
+        eval "$(pyenv init -)"
+    - name: Install Python 3.8.2 with Pyenv
+      run: |
+        pyenv install 3.8.2
+        pyenv global 3.8.2
+    - name: Check Python versions installed with Pyenv
+      run: pyenv versions
