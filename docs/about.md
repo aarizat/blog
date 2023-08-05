@@ -12,7 +12,7 @@
         Here you'll find some content related to Python, I hope you can learn something from it 😁.
     </p>
   </div>
-  <div style="text-align: center; margin-left: 60px;">
-    <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/34245704?v=4&h=350&w=350&fit=cover&mask=circle&maxage=7d" alt="Andres Ariza-Triana"/>
+  <div style="text-align: center; margin-left: 50px;">
+    <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/34245704?v=4&h=300&w=300&fit=cover&mask=ellipse&maxage=7d" alt="Andres Ariza-Triana"/>
   </div>
 </div>
