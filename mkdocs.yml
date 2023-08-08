@@ -11,6 +11,9 @@ theme:
   - search.suggest
   - search.highlight
   - content.tabs.link
+  - content.code.copy
+  - content.code.select
+  - content.code.annotate
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -29,10 +32,9 @@ theme:
         name: Switch to system preference
 
 nav:
-  - About: about.md
-  # - Home: index.md
+  - About: index.md
   - Posts:
-    - posts/dratf_post.md
+    - posts/python_event_loop.md
 
 plugins:
   - search
@@ -48,7 +50,10 @@ markdown_extensions:
   - def_list
   - footnotes
   - attr_list
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
