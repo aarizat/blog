@@ -35,6 +35,7 @@ nav:
   - About: index.md
   - Posts:
     - posts/python_event_loop.md
+    - posts/context_managers_usage.md
 
 plugins:
   - search

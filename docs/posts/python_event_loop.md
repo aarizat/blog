@@ -161,3 +161,8 @@ The highlighted line shows that with the coroutine `coro` pass to the `self._loo
 After `coro` is wrapped into a `Task` (__line 21__), `run` makes some other types of validations and finally the task is passed to `run_until_complete` event loop instance method.
 
 The `run_until_complete` methods run the task passed as parameter until it's finished.
+
+
+## Sum up!
+
+As you could see, there is nothing special underhood when the `#!python asyncio.run()` function is run, it only created and instance of `#!python Runner` class and then its `#!python run` instance method is executed, when this happens, there are some other methods executed, like `!python create_task` and finally `#!python run_until_complete`.
