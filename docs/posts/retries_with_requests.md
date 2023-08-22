@@ -54,7 +54,7 @@ Retry(
 6. **other** (int): How many times to retry on other types of errors.
 7. **allowed_methods** (frozenset): Set of uppercased HTTP method verbs that we should retry on.
 8. **status_forcelist** (list): A set of integer HTTP status codes that we should force a retry on.
-9. **backoff_factor** (float): A backoff factor to apply between attempts. urllib3 will sleep for: ```{backoff factor} * (2 **({number of previous retries}))``` seconds.
+9. **backoff_factor** (float): A backoff factor to apply between attempts. urllib3 will sleep for: ```{backoff factor} * (2 **({number of previous retries}))``` seconds. For instance, with `backoff_factor` set to `0.5`, the sleep times would be `[0s, 0.5s, 1s, 2s, 4s, …]`.
 10. **backoff_max** (int): Maximum sleep time between retries.
 11. **raise_on_redirect** (bool): Whether or not to raise an error on redirects.
 12. **raise_on_status** (bool): Whether or not to raise an error on status.
@@ -85,7 +85,7 @@ The above code means that when we make an HTTP request using the `session` varia
 
 ### Retrying in case of gettting status codes
 
-Suppose you are making an HTTP request to a service and you want to retry the request in case you get a **500** and **503** status codes. For this scenario, you could set up a *retry* logic using `requests` like so:
+Consider a scenario where you're making an HTTP request to a service and you want to retry the request in case you get a **500**(indicating server errors) and **503**(often indicating service unavailability) status codes. For this scenario, you could set up a *retry* logic using `requests` like so:
 
 ```python linenums="1"
 from urllib3.util import Retry
@@ -139,9 +139,9 @@ retries = Retry(
     status_forcelist=[503, 500],
 )
 session.mount('https://', HTTPAdapter(max_retries=retries))
+resp = session.post("https://my_service_url.com", data={"key": "value"})
 
-# ... make your POST request
-
+# ... more code
 ```
 
 You can include any **HTTP** methods of your choice and specify the status codes you wish to retry on.
@@ -149,7 +149,9 @@ You can include any **HTTP** methods of your choice and specify the status codes
 
 ## To Sum up!
 
-As demonstrated, it's straightforward to implement retry logic for HTTP requests using the `requests` library. This is made possible by the `Retry` class from urllib3, which offers extensive configuration options. Try to use another parameters that were not cover in this post and let me know how it goes!.
+As demonstrated, it's straightforward to implement retry logic for HTTP requests using the `requests` library. This is made possible by the `Retry` class from urllib3, which offers extensive configuration options. Experiment with parameters not covered in this post and see how they can fit into your use cases.
+
+Moreover, remember not to over-retry, as this can increase load on servers or even be perceived as a DDoS attack. Also, consider logging retries. When they occur, it's crucial for debugging.
 
 There are other retry libraries out there that you can use to implement retries for your requests, I will drop a list of some that I know:
 
