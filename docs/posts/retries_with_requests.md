@@ -23,7 +23,7 @@ now, let's explore what attributes `Retry` class accepts:
 
 ???+ note
 
-    For a better description of `Retry` attributes, please go to https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html#urllib3.util.Retry.
+    For a better description of `Retry` attributes, please go to https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html#urllib3.util.Retry. version `2.4.0`
 
 ```python
 Retry(
@@ -68,18 +68,19 @@ Now that we know the `Retry` class from *urllib3* and gained a foundational unde
 ```python
 from urllib3.util import Retry
 
-from requests import Session
+from requests import Session # (1)!
 from requests.adapters import HTTPAdapter
 
 
 session = Session()
-retries = Retry() # (1)!
+retries = Retry() # (2)!
 
-session.mount('https://', HTTPAdapter(max_retries=retries)) # (2)!
+session.mount('https://', HTTPAdapter(max_retries=retries)) # (3)!
 ```
 
-1. If we leave out the Retry's arguments, by default, it'll retry the requests 10 times inmediately in case of connection or read errors.
-2. If you want to make requests using the `http` protocol you need to mount another HTTPAdapter like this: `session.mount('http://', HTTPAdapter(max_retries=retries))`.
+1. The `requests` version used in this post is `2.31.0`
+2. If we leave out the Retry's arguments, by default, it'll retry the requests 10 times inmediately in case of connection or read errors.
+3. If you want to make requests using the `http` protocol you need to mount another HTTPAdapter like this: `session.mount('http://', HTTPAdapter(max_retries=retries))`.
 
 The above code means that when we make an HTTP request using the `session` variable, it will have the retry logic we set up previously in the `Retry` class.
 
