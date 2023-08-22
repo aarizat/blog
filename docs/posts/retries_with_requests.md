@@ -83,7 +83,7 @@ session.mount('https://', HTTPAdapter(max_retries=retries)) # (2)!
 
 The above code means that when we make an HTTP request using the `session` variable, it will have the retry logic we set up previously in the `Retry` class.
 
-### Retrying in case of gettting an status code
+### Retrying in case of gettting status codes
 
 Suppose you are making an HTTP request to a service and you want to retry the request in case you get a **500** and **503** status codes. For this scenario, you could set up a *retry* logic using `requests` like so:
 
@@ -99,9 +99,12 @@ add_stderr_logger() # (1)!
 
 session = Session()
 retries = Retry(
-    total=5,
-    backoff_factor=0.1,
-    status_forcelist=[503, 500]
+    total=None,
+    connect=False,
+    read=False,
+    status=3,
+    backoff_factor=1,
+    status_forcelist=[503, 500],
 )
 session.mount('https://', HTTPAdapter(max_retries=retries))
 
@@ -110,8 +113,12 @@ resp = session.get("https://my_sevice_url.com")
 
 1. This function help us see the logs for each retry on the stderror.
 
-The above code initiates an HTTP GET request to `https://my_service_url.com`. If the server responds with a status code found in `status_forcelist`, the request will be retried. The wait times between retries follow this pattern: `[0.0s, 0.2s, 0.4s, 0.8s, ...]`. However, the delay won't exceed the value specified in `backoff_max` (you can change this value if needed). If the server's response header includes the `Retry-After` key, its value will override the calculated wait time based on the backoff factor (You can disable this behaviour setting `respect_retry_after_header` to `False`).
+The above code initiates an HTTP GET request to `https://my_service_url.com`. If the server responds with a status code found in `status_forcelist`, the request will be retried 3 times. The wait times between retries follow this pattern: `[0s, 2s, 4s]`. However, the delay won't exceed the value specified in `backoff_max` (you can change this value if needed). If the server's response header includes the `Retry-After` key, its value will override the calculated wait time based on the backoff factor (You can disable this behaviour setting `respect_retry_after_header` to `False`). In the above retry logic, it's important to note that if we exhaust all retries, we will receive a `RetryError` exception. Additionally, if for any reason we receive a status code during a retry that's not in the list `status_forcelist` (e.g., 403), the retries will stop immediately, and we will encounter the exception associated with that specific status code.
 
+
+???+ warning
+
+    You might be curious about why I set `connect` and `read` to `False`. The reason is that if these parameters are left at their default values, in the event of a connect or read error, the retries will be attempted indefinitely.I also set `total` to `None`, which causes the retry logic to fall back on the `read`, `connect`, or `status` counters.
 
 ### Retry HTTP POST method
 
@@ -122,12 +129,16 @@ By default, retryable HTTP methods include **HEAD**, **GET**, **PUT**, **DELETE*
 
 # ... previous imports
 
+session = Session()
 retries = Retry(
-    total=5,
-    backoff_factor=0.1,
+    total=None,
+    connect=False,
+    read=False,
+    status=3,
+    backoff_factor=1,
     status_forcelist=[503, 500],
-    allowed_methods=['POST', 'GET']
 )
+session.mount('https://', HTTPAdapter(max_retries=retries))
 
 # ... make your POST request
 
