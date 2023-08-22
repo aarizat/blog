@@ -63,7 +63,7 @@ Retry(
 15. **remove_headers_on_redirect** (Collection): Sequence of headers to remove from the request when a response indicating a redirect is returned before firing off the redirected request.
 16. **backoff_jitter** (float): The amount of jitter (randomness) to apply to the delay time before the next retry, given as a fraction of the computed delay time.
 
-Now that we know the `Retry` class from *urllib3* and gained a foundational understanding of its attributes, it's time to integrate it with the `requests` library. To achieve this, we'll utilize the `Session` class from `requests` library. After creating a session, we can then attach our retry logic by mounting an adapter (`HTTPAdapter`) to it. Here's how it's done:
+Now that we brought the `Retry` class from *urllib3* and gained a foundational understanding of its attributes, it's time to integrate it with the `requests` library. To achieve this, we'll use the `Session` class from `requests` library. After creating a session, we can then attach our retry logic by mounting an adapter (`HTTPAdapter`) to it. Here's how it's done:
 
 ```python
 from urllib3.util import Retry
@@ -86,9 +86,9 @@ The above code means that when we make an HTTP request using the `session` varia
 
 ### Retrying in case of gettting status codes
 
-Consider a scenario where you're making an HTTP request to a service and you want to retry the request in case you get a **500**(indicating server errors) and **503**(often indicating service unavailability) status codes. For this scenario, you could set up a *retry* logic using `requests` like so:
+Now consider a scenario where you're making an HTTP request to a service and you want to retry the request in case you get a **500**(indicating server errors) and **503**(often indicating service unavailability) status codes. For this case, you could set up a *retry* logic using `requests` like so:
 
-```python linenums="1"
+```python
 from urllib3.util import Retry
 from urllib3 import add_stderr_logger
 
@@ -114,7 +114,7 @@ resp = session.get("https://my_sevice_url.com")
 
 1. This function help us see the logs for each retry on the stderror.
 
-The above code initiates an HTTP GET request to `https://my_service_url.com`. If the server responds with a status code found in `status_forcelist`, the request will be retried 3 times. The wait times between retries follow this pattern: `[0s, 2s, 4s]`. However, the delay won't exceed the value specified in `backoff_max` (you can change this value if needed). If the server's response header includes the `Retry-After` key, its value will override the calculated wait time based on the backoff factor (You can disable this behaviour setting `respect_retry_after_header` to `False`). In the above retry logic, it's important to note that if we exhaust all retries, we will receive a `RetryError` exception. Additionally, if for any reason we receive a status code during a retry that's not in the list `status_forcelist` (e.g., 403), the retries will stop immediately, and we will encounter the exception associated with that specific status code.
+The above code initiates an HTTP GET request to `https://my_service_url.com`. If the server responds with a status code found in `status_forcelist`, the request will be retried 3 times. The wait times between retries follow this pattern: `[0s, 2s, 4s]`. However, the delay won't exceed the value specified in `backoff_max` (you can change this value if needed). If the server's response header includes the `Retry-After` key, its value will override the calculated wait time based on the backoff factor (You can disable this behaviour setting `respect_retry_after_header` to `False`). In the above retry logic, it's important to note that if we exhaust all retries, we will receive a `RetryError` exception. Additionally, if for any reason we receive a status code during a retry that's not in the list `status_forcelist` (e.g., **403**), the retries will stop immediately, and we will encounter the exception associated with that specific status code.
 
 
 ???+ warning
