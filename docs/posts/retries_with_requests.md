@@ -6,6 +6,8 @@ By default, the requests made with the `requests` library are not "**retrying**"
 
 Sometimes we want to ensure reliable communication between systems. For example, in e-commerce platforms, when a customer places an order, it's essential that the order details are accurately communicated to inventory systems, payment gateways, and shipping providers. Any failure in these communications can result in missed shipments, incorrect billing, or overselling of inventory. In such critical scenarios, merely logging an error isn't enough; implementing *retries* becomes crucial to ensure that business operations run smoothly and customer trust is maintained.
 
+Implementing retries requires the use of certain strategies. We cannot retry a request immediately after it fails; we need to wait a specific period of time for the service/API to become available again. For this, several strategies exist that can be employed to optimize the retry mechanism. One of the most common is exponential **backoff**. This strategy involves increasing the waiting time between retries exponentially, so that each retry waits longer than the previous one. This allows the service or API sufficient time to recover from any transient issues or high traffic.
+
 ## How can `requests` library help us implement *retries* ?
 
 The first thing to know is that the `requests` library is built on top of [urllib3](https://urllib3.readthedocs.io/en/stable/). This foundational library, [urllib3](https://urllib3.readthedocs.io/en/stable/), has built-in support for connection pooling and ***retries***, which makes it a robust choice for web requests. Leveraging this underlying functionality, `requests` can be configured to implement retries with a big variety of features.

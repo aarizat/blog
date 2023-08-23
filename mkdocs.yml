@@ -8,6 +8,9 @@ theme:
   name: material
   locale: en
   features:
+  - navigation.tabs
+  - navigation.tracking
+  - navigation.tabs.sticky
   - search.suggest
   - search.highlight
   - content.tabs.link
@@ -17,18 +20,18 @@ theme:
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: slate
-      primary: blue grey
+      scheme: default
+      primary: teal
       toggle:
-        icon: material/lightbulb
+        icon: material/eye
         name: Switch to dark mode
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: default
-      primary: blue grey
+      scheme: slate
+      primary: teal
       toggle:
-        icon: material/lightbulb-outline
+        icon: material/eye-outline
         name: Switch to system preference
 
 nav:
