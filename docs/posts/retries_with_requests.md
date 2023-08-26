@@ -2,8 +2,9 @@
 title: Retrying HTTP requests with Python requests library.
 author: Andres Ariza-Triana
 author_gh_user: aarizat
-read_time: 5 min
+read_time: 10 min
 publish_date: August 20, 2023
+comments: true
 ---
 
 The Python `requests` library is among the most popular today. According to GitHub, **2.3** million users 😱 are using it. One of the primary reasons for its widespread adoption is its user-friendly API.
