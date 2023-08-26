@@ -7,6 +7,7 @@ copyright: Copyright &copy; 2023 Andres Ariza-Triana
 theme:
   name: material
   locale: en
+  custom_dir: overrides
   features:
   - navigation.tabs
   - navigation.tracking
@@ -33,6 +34,9 @@ theme:
       toggle:
         icon: material/eye-outline
         name: Switch to system preference
+
+extra_css:
+  - stylesheets/custom.css
 
 nav:
   - About: index.md

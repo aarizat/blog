@@ -1,4 +1,11 @@
-# Useful Applications of Python Context Managers
+---
+title: Useful Applications of Python Context Managers.
+author: Andres Ariza-Triana
+author_gh_user: aarizat
+read_time: 5 min
+publish_date: August 14, 2023.
+---
+
 
 As everyone could know, Python Context Managers are a type of object that we can use in a `with` block. What it does is to execute some clean up code after exiting from `with` block. it's mostly used to make sure to free up resources when a exception occurs inside a `with` block.
 

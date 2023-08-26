@@ -1,11 +1,11 @@
 ---
+title: Keeping track of asyncio.run execution.
 author: Andres Ariza-Triana
 author_gh_user: aarizat
-read_time: 5 mins
-publish_date: 07-08-2023
+read_time: 5 min
+publish_date: August 14, 2023.
 ---
 
-# Keeping track of `asyncio.run` execution.
 
 Have you ever been curious about the inner workings of the `#!python asyncio.run()` function? If the answer is no, then get ready for a fascinating journey. This blog post will guide you through the process that takes place behind the scenes.
 
@@ -165,4 +165,4 @@ The `run_until_complete` methods run the task passed as parameter until it's fin
 
 ## Sum up!
 
-As you could see, there is nothing special underhood when the `#!python asyncio.run()` function is run, it only created and instance of `#!python Runner` class and then its `#!python run` instance method is executed, when this happens, there are some other methods executed, like `!python create_task` and finally `#!python run_until_complete`.
+As you could see, there is nothing special underhood when the `#!python asyncio.run()` function is run, it only created and instance of `#!python Runner` class and then its `#!python run` instance method is executed, when this happens, there are some other methods executed, like `#!python create_task` and finally `#!python run_until_complete`.
